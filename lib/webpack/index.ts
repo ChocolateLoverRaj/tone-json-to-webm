@@ -30,10 +30,12 @@ window.addEventListener('click', async () => {
   const timeNow = now()
   const recorder = new Recorder()
   recorder.start()
+  let lastNote = 0
   tracks.forEach(({ notes }) => {
     const synth = new Synth().connect(recorder)
     notes.forEach(({ name, duration, time, velocity }) => {
       synth.triggerAttackRelease(name, duration, timeNow + time, velocity)
+      lastNote = Math.max(lastNote, timeNow + time + duration)
     })
   })
   setTimeout(async () => {
@@ -42,5 +44,5 @@ window.addEventListener('click', async () => {
       method: 'POST',
       body: recording
     })
-  }, 4000)
+  }, lastNote * 1000)
 })
