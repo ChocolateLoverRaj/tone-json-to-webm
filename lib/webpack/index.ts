@@ -1,4 +1,5 @@
 import { start } from 'tone'
+import './index.css'
 
 export interface Note {
   time: number

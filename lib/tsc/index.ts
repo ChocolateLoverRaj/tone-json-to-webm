@@ -32,6 +32,7 @@ const midiJsonToWebm = async (midiJson: MidiJson): Promise<string> => {
     window.midiJson = midiJson
   }, midiJson)
   await page.goto(pagePath)
+  await page.click('body')
   return ''
 }
 
